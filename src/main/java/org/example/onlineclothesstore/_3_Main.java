@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class _3_Main extends Application {
     private static Socket socket;
-    private static BufferedWriter out;
+    private static PrintWriter out;
     private static BufferedReader in;
 
     @Override
@@ -31,9 +31,9 @@ public class _3_Main extends Application {
             createReaderWriter();
 
             //Creazione di un thread per continuare a testare la connessione al server
-            /*Thread connectionChecker = new Thread(this::checkConnection);
+            Thread connectionChecker = new Thread(this::checkConnection);
             connectionChecker.setDaemon(true);  //spegne il thread quando il start terimina
-            connectionChecker.start();*/
+            connectionChecker.start();
 
             Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_homePage.fxml"))));
             Scene scene = new Scene(root);
@@ -47,16 +47,17 @@ public class _3_Main extends Application {
 
     private void createReaderWriter() {
         try {
-            out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (Exception e) {
             System.out.println("PROBLEM OF CONNECTION");
         }
     }
 
-    /*private void checkConnection(){
+    private void checkConnection(){
         while(true){
             try {
+                Thread.sleep(10000);
                 sendMessageToServer("PING");
                 String responseServer = in.readLine();
                 if (responseServer.equals("PONG")) {
@@ -66,20 +67,21 @@ public class _3_Main extends Application {
                     break;
                 }
 
-            }catch(IOException e){
+            }catch(IOException | InterruptedException e){
                 System.err.println("ERRORE RISPOSTA SERVER: "+e.getMessage());
-                // far comparire una schermata di connessione persa FXML
+                // far comparire una schermata di connessione persa FXML e far chiudere il client
+                // con messaggio di riporvare più tardi
             }
         }
-    }*/
+    }
 
     public synchronized void sendMessageToServer(String... messages){
         for(String message : messages){
             try {
                 System.out.println(message);
-                out.write(message);
+                out.println(message);
                 out.flush();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 System.err.println("ERRORE COMUNICAZIONE CON SERVER: "+e.getMessage());
             }
         }

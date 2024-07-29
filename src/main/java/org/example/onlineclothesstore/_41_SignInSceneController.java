@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -19,17 +20,27 @@ public class _41_SignInSceneController {
     @FXML
     private TextField surnameInput;
     @FXML
+    public TextField emailInput;
+    @FXML
+    public PasswordField passInput;
+    @FXML
     private Label nameErrorLabel;
     @FXML
     private Label surnameErrorLabel;
     @FXML
+    public Label passErrorLabel;
+    @FXML
     private Button nextBtnS;
 
     private boolean correctData = false;
+    String name;
+    String surname;
+    String email;
+    String password;
 
     public void initialize() {  //metodo per verificare la validità dei dati
         nameInput.setOnKeyReleased(event -> {   //viene invocato ogni volta che si deseleziona il textField
-            String name = nameInput.getText();
+            name = nameInput.getText();
             if (name.matches("[a-zA-Z]+")) {
                 nameErrorLabel.setText("*");
                 correctData = true;
@@ -41,13 +52,29 @@ public class _41_SignInSceneController {
         });
 
         surnameInput.setOnKeyReleased(event -> {
-            String surname = surnameInput.getText();
+            surname = surnameInput.getText();
             if (surname.matches("[a-zA-Z]+")) {
                 surnameErrorLabel.setText("*");
                 correctData = true;
             } else {
                 correctData = false;
                 surnameErrorLabel.setText("Il cognome può contenere solo lettere.");
+                nextBtnS.setDisable(true);
+            }
+        });
+
+        emailInput.setOnKeyReleased(event ->{
+            email = emailInput.getText();
+        });
+
+        passInput.setOnKeyReleased(event -> {
+            password = passInput.getText();
+            if(password.length() >= 8){
+                passErrorLabel.setText("*");
+                correctData = true;
+            }else{
+                correctData = false;
+                passErrorLabel.setText("La password deve contenere almeno 8 caratteri");
                 nextBtnS.setDisable(true);
             }
 
@@ -61,7 +88,7 @@ public class _41_SignInSceneController {
     //metodo per inviare i dati dell'account al server e registrarli nel DB
     public void sendDataAccountToServer(){
         _3_Main main = new _3_Main();
-        main.sendMessageToServer("DATA-ACCOUNT");
+        main.sendMessageToServer("DATA-ACCOUNT", name, surname, email, password);
     }
 
     public void switchToHomePageScene(javafx.event.ActionEvent event) throws IOException {

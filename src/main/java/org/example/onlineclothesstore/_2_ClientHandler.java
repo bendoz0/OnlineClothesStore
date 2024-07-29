@@ -6,12 +6,12 @@ import java.net.Socket;
 public class _2_ClientHandler implements Runnable{
     private Socket clientSocket;
     private static BufferedReader in;
-    private static BufferedWriter out;
+    private static PrintWriter out;
 
     public _2_ClientHandler(Socket socket) {
         try{
             this.clientSocket = socket;
-            out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+            out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         }catch(IOException e){
             closeEverything(socket, in, out);
@@ -21,27 +21,19 @@ public class _2_ClientHandler implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("punto 1");
+        try {
+            boolean statoClient = false;
+            do {
+                if (clientSocket.isConnected()) {
+                    statoClient = true;
+                }
+            } while (!statoClient);
 
-        while(true){
+            while (true) {
+                String clientMessage = in.readLine();
 
-            System.out.println("punto 2");
-
-            String clientMessage;
-            try {
-                System.out.println("punto 3");
-
-                clientMessage = in.readLine();
-
-                System.out.println("punto 4");
-
-                System.out.println(clientMessage);
-
-                System.out.println("punto 5");
-
-                /*if(clientMessage.equals("PING")){
-                    System.out.println("sono qui");
-                    out.write("PONG\n");
+                if(clientMessage.equals("PING")){
+                    out.println("PONG");
                     out.flush();
                 }
                 else if (clientMessage.equals("DATA-ACCOUNT")){
@@ -53,15 +45,17 @@ public class _2_ClientHandler implements Runnable{
                 }
                 else if(clientMessage.equals("QUIT")){
                     closeEverything(clientSocket, in, out);
-                }*/
-            } catch (IOException e) {
-                System.err.println("ERRORE LETTURA DATI DAL CLIENT: "+e.getMessage());
+                }
+
             }
+        }catch(IOException e){
+            System.out.println("Connessione chiusa con il client: "+clientSocket.getInetAddress());
+            closeEverything(clientSocket, in, out);
         }
     }
 
 
-    private void closeEverything(Socket socket, BufferedReader in, BufferedWriter out){
+    private void closeEverything(Socket socket, BufferedReader in, PrintWriter out){
         try{
             if(out != null){
                 out.close();

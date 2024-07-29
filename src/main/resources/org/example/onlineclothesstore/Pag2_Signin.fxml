@@ -21,7 +21,7 @@
       <Label layoutX="370.0" layoutY="288.0" text="Email" />
       <TextField fx:id="emailInput" layoutX="371.0" layoutY="305.0" promptText="Insert your email" />
       <Label layoutX="372.0" layoutY="341.0" text="Password (Min. 8)" />
-      <PasswordField fx:id="passInput" layoutX="371.0" layoutY="359.0" promptText="Create a password" />
+      <PasswordField fx:id="passInput" layoutX="371.0" layoutY="359.0" onAction="#initialize" promptText="Create a password" />
       <Button fx:id="nextBtnS" disable="true" layoutX="540.0" layoutY="563.0" mnemonicParsing="false" onAction="#sendDataAccountToServer" text="Continue">
          <font>
             <Font size="14.0" />
@@ -34,6 +34,6 @@
       <Label fx:id="nameErrorLabel" layoutX="416.0" layoutY="164.0" text="*" />
       <Label fx:id="surnameErrorLabel" layoutX="431.0" layoutY="217.0" text="*" />
       <Label layoutX="413.0" layoutY="288.0" text="*" />
-      <Label layoutX="476.0" layoutY="341.0" text="*" />
+      <Label fx:id="passErrorLabel" layoutX="476.0" layoutY="341.0" text="*" />
    </children>
 </AnchorPane>
