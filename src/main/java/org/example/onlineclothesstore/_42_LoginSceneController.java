@@ -15,6 +15,21 @@ public class _42_LoginSceneController {
     public TextField emailVerify;
     public TextField passVerify;
 
+    String email;
+    String password;
+
+    public void emailInput(){
+        email = emailVerify.getText();
+    }
+    public void passwordInput(){
+        password = passVerify.getText();
+    }
+
+    public void sendLogInDataToServer(){
+        _3_Main main = new _3_Main();
+        main.sendMessageToServer("LOGIN-ACCOUNT", email, password);
+    }
+
     public void switchToHomePageScene(javafx.event.ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_homePage.fxml"))));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

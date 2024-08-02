@@ -85,10 +85,10 @@ public class _41_SignInSceneController {
         });
     }
 
-    //metodo per inviare i dati dell'account al server e registrarli nel DB
+    //metodo per inviare i dati dell'account al server e registrarli nel DB qunado viene premuto il tasto "Continua"
     public void sendDataAccountToServer(){
         _3_Main main = new _3_Main();
-        main.sendMessageToServer("DATA-ACCOUNT", name, surname, email, password);
+        main.sendMessageToServer("SIGNIN-ACCOUNT", name, surname, email, password);
     }
 
     public void switchToHomePageScene(javafx.event.ActionEvent event) throws IOException {

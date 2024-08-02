@@ -9,6 +9,8 @@ module org.example.onlineclothesstore {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.desktop;
+    requires java.sql;
+    requires mysql.connector.j;
 
     opens org.example.onlineclothesstore to javafx.fxml;
     exports org.example.onlineclothesstore;

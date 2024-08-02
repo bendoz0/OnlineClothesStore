@@ -7,6 +7,7 @@ public class _2_ClientHandler implements Runnable{
     private Socket clientSocket;
     private static BufferedReader in;
     private static PrintWriter out;
+    private DbConnection db = new DbConnection();
 
     public _2_ClientHandler(Socket socket) {
         try{
@@ -36,12 +37,20 @@ public class _2_ClientHandler implements Runnable{
                     out.println("PONG");
                     out.flush();
                 }
-                else if (clientMessage.equals("DATA-ACCOUNT")){
-                    String name = in.readLine();
-                    String surname = in.readLine();
-                    String email = in.readLine();
-                    String password = in.readLine();
-                    System.out.println(name +" " +surname+ " " +email+ " " +password);
+                else if (clientMessage.equals("SIGNIN-ACCOUNT")){
+                    String nameSignIn  = in.readLine();
+                    String surnameSignIn  = in.readLine();
+                    String emailSignIn = in.readLine();
+                    String passwordSignIn  = in.readLine();
+                    db.connectionToDB();
+                    db.insertSignInUser(nameSignIn, surnameSignIn, emailSignIn, passwordSignIn);
+                    //System.out.println(nameSignIn  +" "+ surnameSignIn +" "+ emailSignIn +" "+ passwordSignIn );
+                }
+                else if(clientMessage.equals("LOGIN-ACCOUNT")){
+                    String emailLog = in.readLine();
+                    String passwordLog = in.readLine();
+                    db.connectionToDB();
+                    db.selectLogInUser(emailLog, passwordLog);
                 }
                 else if(clientMessage.equals("QUIT")){
                     closeEverything(clientSocket, in, out);
