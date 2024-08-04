@@ -35,7 +35,7 @@ public class _3_Main extends Application {
             connectionChecker.setDaemon(true);  //spegne il thread quando il start terimina
             connectionChecker.start();
 
-            Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_homePage.fxml"))));
+            Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_welcomePage.fxml"))));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -82,9 +82,19 @@ public class _3_Main extends Application {
                 out.println(message);
                 out.flush();
             } catch (Exception e) {
-                System.err.println("ERRORE COMUNICAZIONE CON SERVER: "+e.getMessage());
+                System.err.println("ERRORE COMUNICAZIONE CON SERVER(scrittura): "+e.getMessage());
             }
         }
+    }
+
+    public synchronized String reciveMessagefromServer(){
+        try {
+            String userFound = in.readLine();
+            return userFound;
+        } catch (IOException e) {
+            System.err.println("ERRORE COMUNICAZIONE CON SERVER(lettura): "+e.getMessage());
+        }
+        return "false";
     }
 
 

@@ -19,7 +19,7 @@
       <Label layoutX="370.0" layoutY="217.0" text="Surname     " />
       <TextField fx:id="surnameInput" layoutX="371.0" layoutY="234.0" onAction="#initialize" promptText="Insert your surname" />
       <Label layoutX="370.0" layoutY="288.0" text="Email" />
-      <TextField fx:id="emailInput" layoutX="371.0" layoutY="305.0" promptText="Insert your email" />
+      <TextField fx:id="emailInput" layoutX="371.0" layoutY="305.0" onAction="#initialize" promptText="Insert your email" />
       <Label layoutX="372.0" layoutY="341.0" text="Password (Min. 8)" />
       <PasswordField fx:id="passInput" layoutX="371.0" layoutY="359.0" onAction="#initialize" promptText="Create a password" />
       <Button fx:id="nextBtnS" disable="true" layoutX="540.0" layoutY="563.0" mnemonicParsing="false" onAction="#sendDataAccountToServer" text="Continue">

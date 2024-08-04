@@ -13,11 +13,11 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="emailVerify" layoutX="370.0" layoutY="198.0" onAction="#emailInput" promptText="email account" />
+      <TextField fx:id="emailVerify" layoutX="370.0" layoutY="198.0" promptText="email account" />
       <Label layoutX="369.0" layoutY="181.0" text="Email" />
-      <TextField fx:id="passVerify" layoutX="370.0" layoutY="251.0" onAction="#passwordInput" promptText="password account" />
+      <TextField fx:id="passVerify" layoutX="370.0" layoutY="251.0" promptText="password account" />
       <Label layoutX="369.0" layoutY="234.0" text="Password" />
-      <Button fx:id="nextBtnL" layoutX="559.0" layoutY="564.0" mnemonicParsing="false" onAction="#sendLogInDataToServer" text="Continue">
+      <Button fx:id="nextBtnL" layoutX="559.0" layoutY="564.0" mnemonicParsing="false" onAction="#initialize" text="Continue">
          <font>
             <Font size="14.0" />
          </font></Button>

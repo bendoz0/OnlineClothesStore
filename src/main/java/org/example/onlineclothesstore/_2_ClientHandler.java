@@ -50,7 +50,8 @@ public class _2_ClientHandler implements Runnable{
                     String emailLog = in.readLine();
                     String passwordLog = in.readLine();
                     db.connectionToDB();
-                    db.selectLogInUser(emailLog, passwordLog);
+                    String userFound = db.selectLogInUser(emailLog, passwordLog);
+                    out.println(userFound);
                 }
                 else if(clientMessage.equals("QUIT")){
                     closeEverything(clientSocket, in, out);
