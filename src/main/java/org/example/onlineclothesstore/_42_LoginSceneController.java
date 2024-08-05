@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -18,6 +19,10 @@ public class _42_LoginSceneController {
     @FXML
     private TextField passVerify;
     @FXML
+    private Label emailErrorLabel;
+    @FXML
+    private Label passwordErrorLabel;
+    @FXML
     private Button nextBtnL;
 
     String email;
@@ -28,7 +33,6 @@ public class _42_LoginSceneController {
             email = emailVerify.getText();
             password = passVerify.getText();
             sendLogInDataToServer(email, password);
-
         });
     }
 
@@ -41,9 +45,13 @@ public class _42_LoginSceneController {
         if(userFound.equals("true")){
             //mettere lo switch che porta alla home page
             System.out.println(userFound);
+            emailErrorLabel.setText("*");
+            passwordErrorLabel.setText("*");
         }else{
             //far comaparire messaggio di email o password sbagliati
             System.out.println(userFound);
+            emailErrorLabel.setText("Email e/o Password SBAGLIATI!");
+            passwordErrorLabel.setText("Password e/o Email SBAGLIATI!");
         }
     }
 

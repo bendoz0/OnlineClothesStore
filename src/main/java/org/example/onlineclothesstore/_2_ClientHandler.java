@@ -43,7 +43,8 @@ public class _2_ClientHandler implements Runnable{
                     String emailSignIn = in.readLine();
                     String passwordSignIn  = in.readLine();
                     db.connectionToDB();
-                    db.insertSignInUser(nameSignIn, surnameSignIn, emailSignIn, passwordSignIn);
+                    String accountFound = db.insertSignInUser(nameSignIn, surnameSignIn, emailSignIn, passwordSignIn);
+                    out.println(accountFound);
                     //System.out.println(nameSignIn  +" "+ surnameSignIn +" "+ emailSignIn +" "+ passwordSignIn );
                 }
                 else if(clientMessage.equals("LOGIN-ACCOUNT")){

@@ -28,6 +28,8 @@ public class _41_SignInSceneController {
     @FXML
     private Label surnameErrorLabel;
     @FXML
+    private Label emailErrorLabel;
+    @FXML
     public Label passErrorLabel;
     @FXML
     private Button nextBtnS;
@@ -89,6 +91,14 @@ public class _41_SignInSceneController {
     public void sendDataAccountToServer(){
         _3_Main main = new _3_Main();
         main.sendMessageToServer("SIGNIN-ACCOUNT", name, surname, email, password);
+
+        String accountFound = main.reciveMessagefromServer();
+        if(accountFound.equals("true")){
+            emailErrorLabel.setText("Email già registrata per un altro ACCOUNT");
+        }else{
+            emailErrorLabel.setText("*");
+            //cambio scena
+        }
     }
 
     public void switchToHomePageScene(javafx.event.ActionEvent event) throws IOException {

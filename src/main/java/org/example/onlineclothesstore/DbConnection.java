@@ -23,9 +23,21 @@ public class DbConnection {
         }
     }
 
-    protected void insertSignInUser(String n, String s, String e, String p) {
-        try (PreparedStatement pstmt = conn.prepareStatement("INSERT INTO User(Name, Surname, Email, Password) VALUES (?, ?, ?, ?)")) {
+    protected String insertSignInUser(String n, String s, String e, String p) {
+        try (PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM User WHERE Email = ?")) {
+            pstmt.setString(1, e);
+            ResultSet rs = pstmt.executeQuery();
 
+            boolean found = rs.next(); // Verifica se c'è almeno una riga
+            if (found) {
+                closeConnection();
+                return "true";
+            }
+        } catch (SQLException err) {
+            System.err.println("ERRORE SELEZIONE DATI DAL DB: " + err.getMessage());
+        }
+
+        try (PreparedStatement pstmt = conn.prepareStatement("INSERT INTO User(Name, Surname, Email, Password) VALUES (?, ?, ?, ?)")) {
             pstmt.setString(1, n);
             pstmt.setString(2, s);
             pstmt.setString(3, e);
@@ -34,13 +46,13 @@ public class DbConnection {
             /*executeUpdate() è un metodo per inserire righe nel db
             l'intero che ritorna indica quante righe ha inserito e se è <= 0 significa che c'è stato un problema*/
             int rowsInserted = pstmt.executeUpdate();
-
-            closeConnection();
-
         } catch (SQLException err) {
             System.err.println("ERRORE INSERIMENTO DATI SUL DB: " + err.getMessage());
         }
+        closeConnection();
+        return "false";
     }
+
 
     protected String selectLogInUser(String e, String p) {
         try (PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM User WHERE Email = ? AND Password = ?")) {
@@ -56,12 +68,13 @@ public class DbConnection {
             }
 
         } catch (SQLException err) {
-            System.err.println("ERRORE UTENTE NON TROVATO: " + err.getMessage());
+            System.err.println("ERRORE SELEZIONE DATI DAL DB: " + err.getMessage());
         }
 
         closeConnection();
         return "false";
     }
+
 
     //Metodo per chiudere le risorse aperte per il DB
     private void closeConnection(){

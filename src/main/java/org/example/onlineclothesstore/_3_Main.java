@@ -89,8 +89,8 @@ public class _3_Main extends Application {
 
     public synchronized String reciveMessagefromServer(){
         try {
-            String userFound = in.readLine();
-            return userFound;
+            String found = in.readLine();
+            return found;
         } catch (IOException e) {
             System.err.println("ERRORE COMUNICAZIONE CON SERVER(lettura): "+e.getMessage());
         }
