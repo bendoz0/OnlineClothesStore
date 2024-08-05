@@ -28,25 +28,37 @@ public class _42_LoginSceneController {
     String email;
     String password;
 
-    public void initialize() {
+
+    /*
+    - questo metodo viene chiamato dal bottone "Continue" nella pagina di LogIn
+    - questo metodo prende come parametro l'evento di Click del bottone "Continue"
+    - il parametro e serve poi per passarlo al metodo switchToHomePageScene, per cambiare scena.
+    */
+    public void initialize(javafx.event.ActionEvent e){
         nextBtnL.setOnAction(event -> {
             email = emailVerify.getText();
             password = passVerify.getText();
-            sendLogInDataToServer(email, password);
+
+            try {
+                sendLogInDataToServer(email, password, e);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 
-    public void sendLogInDataToServer(String email, String password){
+    public void sendLogInDataToServer(String email, String password, javafx.event.ActionEvent e) throws IOException{
         _3_Main main = new _3_Main();
         main.sendMessageToServer("LOGIN-ACCOUNT", email, password);
 
         String userFound = main.reciveMessagefromServer();
 
         if(userFound.equals("true")){
-            //mettere lo switch che porta alla home page
             System.out.println(userFound);
             emailErrorLabel.setText("*");
             passwordErrorLabel.setText("*");
+            //mettere lo switch che porta alla home page
+            switchToHomePageScene(e);
         }else{
             //far comaparire messaggio di email o password sbagliati
             System.out.println(userFound);
@@ -56,6 +68,14 @@ public class _42_LoginSceneController {
     }
 
     public void switchToHomePageScene(javafx.event.ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag4_HomePage.fxml"))));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToWelcomePageScene(javafx.event.ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_welcomePage.fxml"))));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

@@ -88,7 +88,7 @@ public class _41_SignInSceneController {
     }
 
     //metodo per inviare i dati dell'account al server e registrarli nel DB qunado viene premuto il tasto "Continua"
-    public void sendDataAccountToServer(){
+    public void sendDataAccountToServer(javafx.event.ActionEvent event){
         _3_Main main = new _3_Main();
         main.sendMessageToServer("SIGNIN-ACCOUNT", name, surname, email, password);
 
@@ -97,11 +97,25 @@ public class _41_SignInSceneController {
             emailErrorLabel.setText("Email già registrata per un altro ACCOUNT");
         }else{
             emailErrorLabel.setText("*");
+
             //cambio scena
+            try {
+                switchToHomePageScene(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     public void switchToHomePageScene(javafx.event.ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag4_HomePage.fxml"))));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToWelcomePageScene(javafx.event.ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_welcomePage.fxml"))));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

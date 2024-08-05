@@ -26,7 +26,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="backBtn" layoutX="285.0" layoutY="563.0" mnemonicParsing="false" onAction="#switchToHomePageScene" text="Go Back">
+      <Button fx:id="backBtn" layoutX="285.0" layoutY="563.0" mnemonicParsing="false" onAction="#switchToWelcomePageScene" text="Go Back">
          <font>
             <Font size="14.0" />
          </font>
