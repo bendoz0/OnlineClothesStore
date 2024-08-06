@@ -15,14 +15,14 @@
             <Font size="96.0" />
          </font>
       </Label>
-      <Circle fx:id="iconAccount" fill="DODGERBLUE" layoutX="802.0" layoutY="109.0" onMouseClicked="#switchToAccountPageScene" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="iconAccount" fill="DODGERBLUE" layoutX="802.0" layoutY="109.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="letterName" layoutX="793.0" layoutY="73.0" text="J">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
       <Circle fx:id="iconCart" layoutX="698.0" layoutY="109.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="672.0" layoutY="83.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
+      <ImageView fx:id="imageCart" fitHeight="52.0" fitWidth="52.0" layoutX="672.0" layoutY="83.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
          <image>
             <Image url="@images/cerrello.png" />
          </image>
