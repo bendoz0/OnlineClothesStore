@@ -52,16 +52,22 @@ public class _42_LoginSceneController {
         main.sendMessageToServer("LOGIN-ACCOUNT", email, password);
 
         String userFound = main.reciveMessagefromServer();
+        //per separare il la stringa booleana dall'eventuale nome dell'utente
+        String booleanValue = userFound.substring(0, 4);
 
-        if(userFound.equals("true")){
-            System.out.println(userFound);
+        if(booleanValue.equals("true")){
+            System.out.println(booleanValue);
             emailErrorLabel.setText("*");
             passwordErrorLabel.setText("*");
+            //logInName conterrà il nome dell'utente tolta la variabile booleana all'inizio
+            String logInName = userFound.substring(4);
+            //Creazione di un Singleton per settare il nome con il quale si memorizza l'utente
+            UserSingleton.getInstance().setUserName(logInName);
             //mettere lo switch che porta alla home page
             switchToHomePageScene(e);
         }else{
             //far comaparire messaggio di email o password sbagliati
-            System.out.println(userFound);
+            System.out.println(booleanValue);
             emailErrorLabel.setText("Email e/o Password SBAGLIATI!");
             passwordErrorLabel.setText("Password e/o Email SBAGLIATI!");
         }
@@ -73,10 +79,11 @@ public class _42_LoginSceneController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        //chiamo un metodo nella classe _43_HomePage per passargli il nome
     }
 
     public void switchToWelcomePageScene(javafx.event.ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_welcomePage.fxml"))));
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_WelcomePage.fxml"))));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

@@ -9,14 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class _43_HomePageSceneController {
+public class _43_HomeSceneController {
     @FXML
     private Button maglietteD;
     @FXML
@@ -46,37 +45,10 @@ public class _43_HomePageSceneController {
     private int countVisibleM = 0;
 
 
-    public void optionsMenuDonna(){
-        countVisibleD++;
-        if(countVisibleD%2 == 1){
-            maglietteD.setVisible(true);
-            pantaloniD.setVisible(true);
-            gonneD.setVisible(true);
-            accessoriD.setVisible(true);
-        }else{
-            maglietteD.setVisible(false);
-            pantaloniD.setVisible(false);
-            gonneD.setVisible(false);
-            accessoriD.setVisible(false);
-        }
-    }
-    public void optionsMenuUomo(){
-        countVisibleM++;
-        if(countVisibleM%2 == 1){
-            maglietteM.setVisible(true);
-            pantaloniM.setVisible(true);
-            felpeM.setVisible(true);
-            accessoriM.setVisible(true);
-        }else{
-            maglietteM.setVisible(false);
-            pantaloniM.setVisible(false);
-            felpeM.setVisible(false);
-            accessoriM.setVisible(false);
-        }
-    }
-
     @FXML
     public void initialize() {
+        letterName.setText(UserSingleton.getInstance().getUserLetter());
+
         iconAccount.setOnMouseClicked(event -> {
             try {
                 switchToAccountPageScene(event);
@@ -108,15 +80,46 @@ public class _43_HomePageSceneController {
         });
     }
 
+    public void optionsMenuDonna(){
+        countVisibleD++;
+        if(countVisibleD%2 == 1){
+            maglietteD.setVisible(true);
+            pantaloniD.setVisible(true);
+            gonneD.setVisible(true);
+            accessoriD.setVisible(true);
+        }else{
+            maglietteD.setVisible(false);
+            pantaloniD.setVisible(false);
+            gonneD.setVisible(false);
+            accessoriD.setVisible(false);
+        }
+    }
+    public void optionsMenuUomo(){
+        countVisibleM++;
+        if(countVisibleM%2 == 1){
+            maglietteM.setVisible(true);
+            pantaloniM.setVisible(true);
+            felpeM.setVisible(true);
+            accessoriM.setVisible(true);
+        }else{
+            maglietteM.setVisible(false);
+            pantaloniM.setVisible(false);
+            felpeM.setVisible(false);
+            accessoriM.setVisible(false);
+        }
+    }
+
+
     public void switchToAccountPageScene(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag5_AccountPage.fxml"))));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Pag5_AccountPage.fxml"));
+        Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
     public void switchToCartPageScene(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag5_AccountPage.fxml"))));
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag6_CartPage.fxml"))));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

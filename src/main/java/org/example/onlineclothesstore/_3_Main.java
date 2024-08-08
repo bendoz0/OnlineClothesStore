@@ -35,7 +35,7 @@ public class _3_Main extends Application {
             connectionChecker.setDaemon(true);  //spegne il thread quando il start terimina
             connectionChecker.start();
 
-            Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_welcomePage.fxml"))));
+            Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_WelcomePage.fxml"))));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

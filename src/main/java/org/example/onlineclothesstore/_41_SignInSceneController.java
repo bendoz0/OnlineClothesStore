@@ -100,6 +100,8 @@ public class _41_SignInSceneController {
 
             //cambio scena
             try {
+                //Creazione di un Singleton per settare il nome con il quale si memorizza l'utente
+                UserSingleton.getInstance().setUserName(name);
                 switchToHomePageScene(event);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -108,7 +110,8 @@ public class _41_SignInSceneController {
     }
 
     public void switchToHomePageScene(javafx.event.ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag4_HomePage.fxml"))));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Pag4_HomePage.fxml"));
+        Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -116,7 +119,7 @@ public class _41_SignInSceneController {
     }
 
     public void switchToWelcomePageScene(javafx.event.ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_welcomePage.fxml"))));
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("Pag1_WelcomePage.fxml"))));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

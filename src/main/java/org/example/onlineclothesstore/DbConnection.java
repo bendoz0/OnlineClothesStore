@@ -60,11 +60,12 @@ public class DbConnection {
             pstmt.setString(2, p);
 
             ResultSet rs = pstmt.executeQuery();
-            boolean found = rs.next(); // Verifica se c'è almeno una riga
+            //boolean found = rs.next(); // Verifica se c'è almeno una riga
 
-            if (found) {
+            if (rs.next()) {    // Verifica se c'è almeno una riga
+                String name = rs.getString("Name");
                 closeConnection();
-                return "true";
+                return "true"+name;
             }
 
         } catch (SQLException err) {

@@ -5,15 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.onlineclothesstore._44_AccountSceneController">
    <children>
       <Label fx:id="nameAccount" layoutX="218.0" layoutY="82.0" text="... Account">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="174.0" layoutY="200.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Go Back" />
-      <Button layoutX="355.0" layoutY="200.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="LogOut" />
+      <Button layoutX="174.0" layoutY="200.0" mnemonicParsing="false" onAction="#switchToHomePageScene" prefHeight="26.0" prefWidth="70.0" text="Go Back" />
+      <Button layoutX="355.0" layoutY="200.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="70.0" text="LogOut" />
    </children>
 </AnchorPane>
