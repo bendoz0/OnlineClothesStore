@@ -2,6 +2,7 @@ package org.example.onlineclothesstore;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DbConnection {
     private static Connection conn;
@@ -75,6 +76,14 @@ public class DbConnection {
         closeConnection();
         return "false";
     }
+
+
+    /*protected ArrayList selectClothes(String category){
+        //per creare l'arraylist devo creare una classe che crei degli oggetti da inserire poi nell'array
+        ArrayList<> clothes = new ArrayList();
+
+        return clothes;
+    }*/
 
 
     //Metodo per chiudere le risorse aperte per il DB

@@ -54,8 +54,14 @@ public class _2_ClientHandler implements Runnable{
                     String userFound = db.selectLogInUser(emailLog, passwordLog);
                     out.println(userFound);
                 }
-                else if(clientMessage.equals("QUIT")){
-                    closeEverything(clientSocket, in, out);
+                else if(clientMessage.equals("CLOTHES")){
+                    String category = in.readLine();
+                    db.connectionToDB();
+                    // IDEA creare un metodo nella classe DbConnection
+                    // per eseguire una query di selezione degli articoli desiderati
+                    // e farli caricare in un arraylist. Il metodo della query ritorna un arraylist
+                    // che poi da qui viene inviato al client che li elabora.
+
                 }
 
             }

@@ -1,5 +1,6 @@
 package org.example.onlineclothesstore;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -41,8 +42,8 @@ public class _43_HomeSceneController {
     @FXML
     private ImageView imageCart;
 
-    private int countVisibleD = 0;
-    private int countVisibleM = 0;
+    private boolean isVisibleD = false;
+    private boolean isVisibleM = false;
 
 
     @FXML
@@ -81,32 +82,64 @@ public class _43_HomeSceneController {
     }
 
     public void optionsMenuDonna(){
-        countVisibleD++;
-        if(countVisibleD%2 == 1){
-            maglietteD.setVisible(true);
-            pantaloniD.setVisible(true);
-            gonneD.setVisible(true);
-            accessoriD.setVisible(true);
+        isVisibleD = !isVisibleD;
+        if(isVisibleD){
+            if(isVisibleM){
+                isVisibleM = !isVisibleM;
+                hiddenM();
+            }
+            visibleD();
         }else{
-            maglietteD.setVisible(false);
-            pantaloniD.setVisible(false);
-            gonneD.setVisible(false);
-            accessoriD.setVisible(false);
+            hiddenD();
         }
     }
     public void optionsMenuUomo(){
-        countVisibleM++;
-        if(countVisibleM%2 == 1){
-            maglietteM.setVisible(true);
-            pantaloniM.setVisible(true);
-            felpeM.setVisible(true);
-            accessoriM.setVisible(true);
+        isVisibleM = !isVisibleM;
+        if(isVisibleM){
+            if(isVisibleD){
+                isVisibleD = !isVisibleD;
+                hiddenD();
+            }
+            visibleM();
         }else{
-            maglietteM.setVisible(false);
-            pantaloniM.setVisible(false);
-            felpeM.setVisible(false);
-            accessoriM.setVisible(false);
+            hiddenM();
         }
+    }
+
+    private void visibleD(){
+        maglietteD.setVisible(true);
+        pantaloniD.setVisible(true);
+        gonneD.setVisible(true);
+        accessoriD.setVisible(true);
+    }
+    private void hiddenD(){
+        maglietteD.setVisible(false);
+        pantaloniD.setVisible(false);
+        gonneD.setVisible(false);
+        accessoriD.setVisible(false);
+    }
+    private void visibleM(){
+        maglietteM.setVisible(true);
+        pantaloniM.setVisible(true);
+        felpeM.setVisible(true);
+        accessoriM.setVisible(true);
+    }
+    private void hiddenM(){
+        maglietteM.setVisible(false);
+        pantaloniM.setVisible(false);
+        felpeM.setVisible(false);
+        accessoriM.setVisible(false);
+    }
+
+    @FXML
+    private void clothesPage(ActionEvent event) throws IOException {
+        //le successive due righe servono per catturare l'evento del bottone e risalire al suo id
+        Button source = (Button) event.getSource();
+        String id = source.getId();
+        //qui chiamare il metodo del main per inviargli il nome della categoria per creare la pagina con quei vestiti
+        //il nome della categoria che inviamo è in base all'id del bottone premuto
+        _3_Main main = new _3_Main();
+        main.sendMessageToServer("CLOTHES", id);
     }
 
 
